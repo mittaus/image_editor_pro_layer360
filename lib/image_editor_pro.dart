@@ -92,6 +92,9 @@ class _ImageEditorProState extends State<ImageEditorPro> {
     multiwidget.clear();
     howmuchwidgetis = 0;
     // TODO: implement initState
+
+    bottomsheets();
+                
     super.initState();
   }
 
