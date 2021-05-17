@@ -109,7 +109,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: new Text("Select Height Width"),
+                          title: new Text("Seleccionar ancho y alto"),
                           actions: <Widget>[
                             FlatButton(
                                 onPressed: () {
@@ -128,7 +128,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                new Text("Define Height"),
+                                new Text("Definir altura"),
                                 new SizedBox(
                                   height: 10,
                                 ),
@@ -137,14 +137,14 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                     keyboardType:
                                         TextInputType.numberWithOptions(),
                                     decoration: InputDecoration(
-                                        hintText: 'Height',
+                                        hintText: 'Altura',
                                         contentPadding:
                                             EdgeInsets.only(left: 10),
                                         border: OutlineInputBorder())),
                                 new SizedBox(
                                   height: 10,
                                 ),
-                                new Text("Define Width"),
+                                new Text("Definir ancho"),
                                 new SizedBox(
                                   height: 10,
                                 ),
@@ -153,7 +153,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                     keyboardType:
                                         TextInputType.numberWithOptions(),
                                     decoration: InputDecoration(
-                                        hintText: 'Width',
+                                        hintText: 'Ancho',
                                         contentPadding:
                                             EdgeInsets.only(left: 10),
                                         border: OutlineInputBorder())),
@@ -316,7 +316,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         showDialog(
                             context: context,
                             child: AlertDialog(
-                              title: const Text('Pick a color!'),
+                              title: const Text('Elije un color'),
                               content: SingleChildScrollView(
                                 child: ColorPicker(
                                   pickerColor: pickerColor,
@@ -327,7 +327,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               ),
                               actions: <Widget>[
                                 FlatButton(
-                                  child: const Text('Got it'),
+                                  child: const Text('Entendido'),
                                   onPressed: () {
                                     setState(() => currentColor = pickerColor);
                                     Navigator.of(context).pop();
@@ -336,7 +336,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               ],
                             ));
                       },
-                      title: 'Brush',
+                      title: 'Brocha',
                     ),
                     BottomBarContainer(
                       icons: Icons.text_fields,
@@ -355,7 +355,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           howmuchwidgetis++;
                         }
                       },
-                      title: 'Text',
+                      title: 'Texto',
                     ),
                     BottomBarContainer(
                       icons: FontAwesomeIcons.eraser,
@@ -367,7 +367,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         multiwidget.clear();
                         howmuchwidgetis = 0;
                       },
-                      title: 'Eraser',
+                      title: 'Borrador',
                     ),
                     BottomBarContainer(
                       icons: Icons.photo,
@@ -378,7 +378,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               return ColorPiskersSlider();
                             });
                       },
-                      title: 'Filter',
+                      title: 'Filtro',
                     ),
                     BottomBarContainer(
                       icons: FontAwesomeIcons.smile,
@@ -398,7 +398,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           }
                         });
                       },
-                      title: 'Emoji',
+                      title: 'Emoticono',
                     ),
                   ],
                 ),
@@ -420,7 +420,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: new Text("Select Image Options"),
+                child: new Text("Opciones de elegir imagen"),
               ),
               Divider(
                 height: 1,
@@ -455,7 +455,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                     Navigator.pop(context);
                                   }),
                               SizedBox(width: 10),
-                              Text("Open Gallery")
+                              Text("Abrir de galería")
                             ],
                           ),
                         ),
@@ -484,7 +484,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                   Navigator.pop(context);
                                 }),
                             SizedBox(width: 10),
-                            Text("Open Camera")
+                            Text("Abrir cámara")
                           ],
                         ),
                       ),
