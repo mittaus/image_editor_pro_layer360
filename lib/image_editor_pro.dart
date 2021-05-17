@@ -83,7 +83,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   }
 
   @override
-  void initState() async{
+  void initState() {
     timers();
     _controller.clear();
     type.clear();
@@ -94,8 +94,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
     // TODO: implement initState
                 
     super.initState();
-    await Future.delayed(Duration(seconds: 1), ()=> bottomsheets());
-    
+    bottomsheets();
   }
 
   @override
