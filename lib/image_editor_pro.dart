@@ -121,7 +121,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                   widthcontroler.clear();
                                   Navigator.pop(context);
                                 },
-                                child: new Text("Done"))
+                                child: new Text("Guardar"))
                           ],
                           content: new SingleChildScrollView(
                             child: new Column(
