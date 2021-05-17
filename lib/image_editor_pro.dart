@@ -99,7 +99,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
 
   @override
   Widget build(BuildContext context) {
-    
+    bottomsheets();
     return Scaffold(
         backgroundColor: Colors.grey,
         key: scaf,
@@ -561,7 +561,7 @@ class _SlidersState extends State<Sliders> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: new Text("Slider Size"),
+              child: new Text("Tamaño"),
             ),
             Divider(
               height: 1,
