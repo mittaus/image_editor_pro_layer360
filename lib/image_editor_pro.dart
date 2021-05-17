@@ -92,7 +92,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
     multiwidget.clear();
     howmuchwidgetis = 0;
     // TODO: implement initState
-                
+    Future.delayed(Duration(seconds: 5), ()=>bottomsheets());
     super.initState();
     
   }
@@ -499,7 +499,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
           ),
         );
       },
-    ).then((value) => bottomsheets());
+    );
     future.then((void value) => _closeModal(value));
   }
 
