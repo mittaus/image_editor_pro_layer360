@@ -121,7 +121,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                   widthcontroler.clear();
                                   Navigator.pop(context);
                                 },
-                                child: new Text("Guardar"))
+                                child: new Text("Aceptar"))
                           ],
                           content: new SingleChildScrollView(
                             child: new Column(
@@ -175,7 +175,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                   bottomsheets();
                 }),
             new FlatButton(
-                child: new Text("Done"),
+                child: new Text("Aceptar"),
                 textColor: Colors.white,
                 onPressed: () {
                   File _imageFile;
