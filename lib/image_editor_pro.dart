@@ -94,7 +94,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
     // TODO: implement initState
                 
     super.initState();
-    bottomsheets();
+    
   }
 
   @override
