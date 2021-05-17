@@ -58,7 +58,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   Offset offset1 = Offset.zero;
   Offset offset2 = Offset.zero;
   final scaf = GlobalKey<ScaffoldState>();
-  var openbottomsheet = true;
+  var openbottomsheet = false;
   List<Offset> _points = <Offset>[];
   List type = [];
   List aligment = [];
@@ -83,7 +83,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   }
 
   @override
-  void initState() {
+  void initState() async{
     timers();
     _controller.clear();
     type.clear();
@@ -94,6 +94,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
     // TODO: implement initState
                 
     super.initState();
+    await Future.delayed(Duration(seconds: 1), ()=> bottomsheets());
+    
   }
 
   @override
