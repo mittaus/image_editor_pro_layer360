@@ -58,7 +58,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   Offset offset1 = Offset.zero;
   Offset offset2 = Offset.zero;
   final scaf = GlobalKey<ScaffoldState>();
-  var openbottomsheet = false;
+  var openbottomsheet = true;
   List<Offset> _points = <Offset>[];
   List type = [];
   List aligment = [];
@@ -92,7 +92,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
     multiwidget.clear();
     howmuchwidgetis = 0;
     // TODO: implement initState
-    bottomsheets();
+                
     super.initState();
   }
 
