@@ -99,7 +99,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
 
   @override
   Widget build(BuildContext context) {
-    bottomsheets();
+    
     return Scaffold(
         backgroundColor: Colors.grey,
         key: scaf,
@@ -499,7 +499,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
           ),
         );
       },
-    );
+    ).then((value) => bottomsheets());
     future.then((void value) => _closeModal(value));
   }
 
