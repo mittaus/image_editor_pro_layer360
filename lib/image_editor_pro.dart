@@ -372,7 +372,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       },
                       title: 'Borrador',
                     ),
-                    /* BottomBarContainer(
+                    BottomBarContainer(
                       icons: Icons.photo,
                       ontap: () {
                         showModalBottomSheet(
@@ -382,7 +382,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                             });
                       },
                       title: 'Filtro',
-                    ), */
+                    ),
                     BottomBarContainer(
                       icons: FontAwesomeIcons.smile,
                       ontap: () {
