@@ -177,7 +177,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                   bottomsheets();
                 }),
             new FlatButton(
-                child: new Text("Aceptar"),
+                child: new Text("Acepta"),
                 textColor: Colors.white,
                 onPressed: () {
                   File _imageFile;
