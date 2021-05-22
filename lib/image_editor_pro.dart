@@ -224,101 +224,113 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     child: new ListView(
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
-                        BottomBarContainer(
-                          iconColor: widget.appBarColor,
-                          colors: Colors.white,
-                          icons: FontAwesomeIcons.cut,
-                          ontap: () async{
-                            // raise the [showDialog] widget
-                            if(_image!=null){
-                              File resultImage= await ImageCropper.cropImage(
+                        Tooltip(
+                          message: 'Cortar',
+                          child: BottomBarContainer(
+                            iconColor: widget.appBarColor,
+                            colors: Colors.white,
+                            icons: FontAwesomeIcons.cut,
+                            ontap: () async{
+                              // raise the [showDialog] widget
+                              if(_image!=null){
+                                File resultImage= await ImageCropper.cropImage(
 
-                                sourcePath: _image.path,
-                                aspectRatioPresets: [
-                                  CropAspectRatioPreset.square,
-                                  CropAspectRatioPreset.ratio3x2,
-                                  CropAspectRatioPreset.original,
-                                  CropAspectRatioPreset.ratio4x3,
-                                  CropAspectRatioPreset.ratio16x9
-                                ],
-                                androidUiSettings: AndroidUiSettings(
-                                    toolbarTitle: 'Cortar Imagen',
-                                    toolbarColor: widget.appBarColor,
-                                    toolbarWidgetColor: Colors.white,
+                                  sourcePath: _image.path,
+                                  aspectRatioPresets: [
+                                    CropAspectRatioPreset.square,
+                                    CropAspectRatioPreset.ratio3x2,
+                                    CropAspectRatioPreset.original,
+                                    CropAspectRatioPreset.ratio4x3,
+                                    CropAspectRatioPreset.ratio16x9
+                                  ],
+                                  androidUiSettings: AndroidUiSettings(
+                                      toolbarTitle: 'Cortar Imagen',
+                                      toolbarColor: widget.appBarColor,
+                                      toolbarWidgetColor: Colors.white,
 
-                                    //toolbarWidgetColor:widget.appBarColor,
-                                    initAspectRatio: CropAspectRatioPreset.original,
-                                    lockAspectRatio: false),
-                                iosUiSettings: IOSUiSettings(
-                                  minimumAspectRatio: 1.0,
-                                )
-                            );
-                              if(resultImage!=null){
-                                _image=resultImage;
+                                      //toolbarWidgetColor:widget.appBarColor,
+                                      initAspectRatio: CropAspectRatioPreset.original,
+                                      lockAspectRatio: false),
+                                  iosUiSettings: IOSUiSettings(
+                                    minimumAspectRatio: 1.0,
+                                  )
+                              );
+                                if(resultImage!=null){
+                                  _image=resultImage;
+                                }
+                              setState(() {
+                                
+                              });
                               }
-                            setState(() {
-                              
-                            });
-                            }
-                          },
-                          title: 'Cortar',
+                            },
+                            title: 'Cortar',
+                          ),
                         ),
-                        BottomBarContainer(
-                          iconColor: widget.appBarColor,
-                          colors: Colors.white,
-                          icons: FontAwesomeIcons.smile,
-                          ontap: () {
-                            Future getemojis = showModalBottomSheet(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Emojies();
-                                });
-                            getemojis.then((value) {
-                              if (value != null) {
-                                type.add(1);
+                        Tooltip(
+                          message: 'Emoticono',
+                          child: BottomBarContainer(
+                            iconColor: widget.appBarColor,
+                            colors: Colors.white,
+                            icons: FontAwesomeIcons.smile,
+                            ontap: () {
+                              Future getemojis = showModalBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Emojies();
+                                  });
+                              getemojis.then((value) {
+                                if (value != null) {
+                                  type.add(1);
+                                  fontsize.add(20);
+                                  offsets.add(Offset.zero);
+                                  multiwidget.add(value);
+                                  howmuchwidgetis++;
+                                }
+                              });
+                            },
+                            title: 'Emoticono',
+                          ),
+                        ),
+                        Tooltip(
+                          message: 'Texto',
+                          child: BottomBarContainer(
+                            iconColor: widget.appBarColor,
+                            colors: Colors.white,
+                            icons: Icons.text_fields,
+                            ontap: () async {
+                              final value = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TextEditor()));
+                              if (value.toString().isEmpty || value.toString().trim()=='' ) {
+                                print("true");
+                              } else {
+                                type.add(2);
                                 fontsize.add(20);
                                 offsets.add(Offset.zero);
                                 multiwidget.add(value);
                                 howmuchwidgetis++;
                               }
-                            });
-                          },
-                          title: 'Emoticono',
+                            },
+                            title: 'Texto',
+                          ),
                         ),
-                        BottomBarContainer(
-                          iconColor: widget.appBarColor,
-                          colors: Colors.white,
-                          icons: Icons.text_fields,
-                          ontap: () async {
-                            final value = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TextEditor()));
-                            if (value.toString().isEmpty) {
-                              print("true");
-                            } else {
-                              type.add(2);
-                              fontsize.add(20);
-                              offsets.add(Offset.zero);
-                              multiwidget.add(value);
-                              howmuchwidgetis++;
-                            }
-                          },
-                          title: 'Texto',
-                        ),
-                        BottomBarContainer(
-                          iconColor: widget.appBarColor,
-                          colors: Colors.white,
-                          icons: FontAwesomeIcons.eraser,
-                          ontap: () {
-                            _controller.clear();
-                            type.clear();
-                            fontsize.clear();
-                            offsets.clear();
-                            multiwidget.clear();
-                            howmuchwidgetis = 0;
-                          },
-                          title: 'Borrador',
+                        Tooltip(
+                          message: 'Borrador',
+                          child: BottomBarContainer(
+                            iconColor: widget.appBarColor,
+                            colors: Colors.white,
+                            icons: FontAwesomeIcons.eraser,
+                            ontap: () {
+                              _controller.clear();
+                              type.clear();
+                              fontsize.clear();
+                              offsets.clear();
+                              multiwidget.clear();
+                              howmuchwidgetis = 0;
+                            },
+                            title: 'Borrador',
+                          ),
                         ),
                         /* BottomBarContainer(
                           iconColor: widget.appBarColor,
@@ -333,36 +345,39 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           },
                           title: 'Filtro',
                         ), */
-                        BottomBarContainer(
-                          iconColor: widget.appBarColor,
-                          colors: Colors.white,
-                          icons: FontAwesomeIcons.paintBrush,
-                          ontap: () {
-                            // raise the [showDialog] widget
-                            showDialog(
-                                context: context,
-                                child: AlertDialog(
-                                  title: const Text('Elije un color'),
-                                  content: SingleChildScrollView(
-                                    child: ColorPicker(
-                                      pickerColor: pickerColor,
-                                      onColorChanged: changeColor,
-                                      showLabel: true,
-                                      pickerAreaHeightPercent: 0.8,
+                        Tooltip(
+                          message: 'Pincel',
+                          child: BottomBarContainer(
+                            iconColor: widget.appBarColor,
+                            colors: Colors.white,
+                            icons: FontAwesomeIcons.paintBrush,
+                            ontap: () {
+                              // raise the [showDialog] widget
+                              showDialog(
+                                  context: context,
+                                  child: AlertDialog(
+                                    title: const Text('Elije un color'),
+                                    content: SingleChildScrollView(
+                                      child: ColorPicker(
+                                        pickerColor: pickerColor,
+                                        onColorChanged: changeColor,
+                                        showLabel: true,
+                                        pickerAreaHeightPercent: 0.8,
+                                      ),
                                     ),
-                                  ),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      child: const Text('Entendido'),
-                                      onPressed: () {
-                                        setState(() => currentColor = pickerColor);
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                ));
-                          },
-                          title: 'Brocha',
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: const Text('Entendido'),
+                                        onPressed: () {
+                                          setState(() => currentColor = pickerColor);
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  ));
+                            },
+                            title: 'Brocha',
+                          ),
                         ),
                         
                       ],

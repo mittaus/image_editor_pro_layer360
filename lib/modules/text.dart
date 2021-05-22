@@ -48,21 +48,21 @@ class _TextEditorState extends State<TextEditor> {
         ),
       ),
       bottomNavigationBar: new Container(
-        color: Colors.white,
+        color: Colors.black,
         padding: EdgeInsets.all(10),
         child: new FlatButton(
             onPressed: () {
               Navigator.pop(context, name.text);
             },
-            color: Colors.black,
+            color: Color(0xFF009ee0),
             padding: EdgeInsets.all(15),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: new Text(
               "Agregar texto",
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
                   color: Colors.white),
             )),
       ),
