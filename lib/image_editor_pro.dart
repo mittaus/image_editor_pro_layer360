@@ -793,7 +793,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                             image.readAsBytesSync());
 
                                     setState(() {
-                                      height = decodedImage.height.toDouble()-(2*kBottomNavigationBarHeight);
+                                      height = decodedImage.height.toDouble();
                                       width = decodedImage.width.toDouble();
                                       _image = image;
                                     });
