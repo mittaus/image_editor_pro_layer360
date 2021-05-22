@@ -103,7 +103,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
     
     setState(() {
       width=size.width;
-      height=size.height;
+      height=size.height-(kBottomNavigationBarHeight);
     });
     return SafeArea(
       child: Scaffold(
