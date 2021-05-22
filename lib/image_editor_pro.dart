@@ -450,8 +450,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
               ),
             ],
           ),
-          bottomNavigationBar: AppBar(
-            actions: <Widget>[
+          bottomNavigationBar: Row(
+            children: <Widget>[
               new IconButton(
                   icon: Icon(FontAwesomeIcons.boxes),
                   onPressed: () {
@@ -549,7 +549,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     });
                   }),
             ],
-            backgroundColor: widget.appBarColor,
+            
           ),
           /* bottomNavigationBar: openbottomsheet
               ? new Container()
