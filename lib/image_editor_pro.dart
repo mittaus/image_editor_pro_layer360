@@ -228,26 +228,31 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         ontap: () async{
                           // raise the [showDialog] widget
                           if(_image!=null){
-                            _image= await ImageCropper.cropImage(
-                            sourcePath: _image.path,
-                            aspectRatioPresets: [
-                              CropAspectRatioPreset.square,
-                              CropAspectRatioPreset.ratio3x2,
-                              CropAspectRatioPreset.original,
-                              CropAspectRatioPreset.ratio4x3,
-                              CropAspectRatioPreset.ratio16x9
-                            ],
-                            androidUiSettings: AndroidUiSettings(
-                                toolbarTitle: 'Cortar Imagen',
-                                toolbarColor: widget.bottomBarColor,
-                                
-                                toolbarWidgetColor: widget.appBarColor,
-                                initAspectRatio: CropAspectRatioPreset.original,
-                                lockAspectRatio: false),
-                            iosUiSettings: IOSUiSettings(
-                              minimumAspectRatio: 1.0,
-                            )
+                            File resultImage= await ImageCropper.cropImage(
+
+                              sourcePath: _image.path,
+                              aspectRatioPresets: [
+                                CropAspectRatioPreset.square,
+                                CropAspectRatioPreset.ratio3x2,
+                                CropAspectRatioPreset.original,
+                                CropAspectRatioPreset.ratio4x3,
+                                CropAspectRatioPreset.ratio16x9
+                              ],
+                              androidUiSettings: AndroidUiSettings(
+                                  toolbarTitle: 'Cortar Imagen',
+                                  toolbarColor: widget.appBarColor,
+                                  toolbarWidgetColor: Colors.white,
+
+                                  //toolbarWidgetColor:widget.appBarColor,
+                                  initAspectRatio: CropAspectRatioPreset.original,
+                                  lockAspectRatio: false),
+                              iosUiSettings: IOSUiSettings(
+                                minimumAspectRatio: 1.0,
+                              )
                           );
+                            if(resultImage!=null){
+                              _image=resultImage;
+                            }
                           setState(() {
                             
                           });
@@ -537,13 +542,13 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     onPressed: () {
                       bottomsheets();
                 }),
-                /* Container(
+                Flexible(
                   child: TextFormField(
-                    decoration: InputDecoration(
+                    /* decoration: InputDecoration(
                       hintText: 'Añade una descripción',
-                    ),
+                    ), */
                   ),
-                ), */
+                ),
                 Container(
                   decoration: BoxDecoration(
                     color: widget.appBarColor,
