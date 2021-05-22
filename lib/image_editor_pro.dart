@@ -103,7 +103,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
     
     setState(() {
       width=size.width;
-      height=size.height-(2*kBottomNavigationBarHeight);  
+      height=size.height-(2*kBottomNavigationBarHeight);
     });
     return SafeArea(
       child: Scaffold(
@@ -360,10 +360,10 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                 child: Screenshot(
                   controller: screenshotController,
                   child: Container(
-                    margin: EdgeInsets.all(20),
+                    //margin: EdgeInsets.all(20),
                     color: Colors.white,
                     width: width.toDouble(),
-                    height: height.toDouble(),
+                    height: height.toDouble()-(2*kBottomNavigationBarHeight),
                     child: RepaintBoundary(
                         key: globalKey,
                         child: Stack(
