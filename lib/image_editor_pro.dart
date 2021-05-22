@@ -363,7 +363,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     //margin: EdgeInsets.all(20),
                     color: Colors.white,
                     width: width.toDouble(),
-                    height: height.toDouble()-(kBottomNavigationBarHeight)-MediaQuery.of(context).padding.top,
+                    height: height.toDouble()-MediaQuery.of(context).padding.top,
                     child: RepaintBoundary(
                         key: globalKey,
                         child: Stack(
