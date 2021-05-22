@@ -207,9 +207,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
           ), */
           body: Column(
             children: [
-              openbottomsheet
-              ? new Container()
-              : Container(
+              Container(
                   decoration: BoxDecoration(
                       color: widget.bottomBarColor,
                       boxShadow: [BoxShadow(blurRadius: 10.9)]),
@@ -218,8 +216,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
                       BottomBarContainer(
-                        iconColor: Colors.white,
-                        colors: widget.appBarColor,
+                        iconColor: widget.appBarColor,
+                        colors: Colors.white,
                         icons: FontAwesomeIcons.brush,
                         ontap: () {
                           // raise the [showDialog] widget
@@ -452,7 +450,108 @@ class _ImageEditorProState extends State<ImageEditorPro> {
               ),
             ],
           ),
-          bottomNavigationBar: openbottomsheet
+          bottomNavigationBar: AppBar(
+            actions: <Widget>[
+              new IconButton(
+                  icon: Icon(FontAwesomeIcons.boxes),
+                  onPressed: () {
+                    showCupertinoDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: new Text("Seleccionar ancho y alto"),
+                            actions: <Widget>[
+                              FlatButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      height = int.parse(heightcontroler.text);
+                                      width = int.parse(widthcontroler.text);
+                                    });
+                                    heightcontroler.clear();
+                                    widthcontroler.clear();
+                                    Navigator.pop(context);
+                                  },
+                                  child: new Text("Aceptar"))
+                            ],
+                            content: new SingleChildScrollView(
+                              child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  new Text("Definir altura"),
+                                  new SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextField(
+                                      controller: heightcontroler,
+                                      keyboardType:
+                                          TextInputType.numberWithOptions(),
+                                      decoration: InputDecoration(
+                                          hintText: 'Altura',
+                                          contentPadding:
+                                              EdgeInsets.only(left: 10),
+                                          border: OutlineInputBorder())),
+                                  new SizedBox(
+                                    height: 10,
+                                  ),
+                                  new Text("Definir ancho"),
+                                  new SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextField(
+                                      controller: widthcontroler,
+                                      keyboardType:
+                                          TextInputType.numberWithOptions(),
+                                      decoration: InputDecoration(
+                                          hintText: 'Ancho',
+                                          contentPadding:
+                                              EdgeInsets.only(left: 10),
+                                          border: OutlineInputBorder())),
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  }),
+              new IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {
+                    _controller.points.clear();
+                    setState(() {});
+                  }),
+              new IconButton(
+                  icon: Icon(Icons.camera),
+                  onPressed: () {
+                    bottomsheets();
+                  }),
+              new FlatButton(
+                  child: new Text("Aceptar"),
+                  textColor: Colors.white,
+                  onPressed: () {
+                    File _imageFile;
+                    _imageFile = null;
+                    screenshotController
+                        .capture(
+                            delay: Duration(milliseconds: 500), pixelRatio: 1.5)
+                        .then((File image) async {
+                      //print("Capture Done");
+                      setState(() {
+                        _imageFile = image;
+                      });
+                      final paths = await getExternalStorageDirectory();
+                      image.copy(paths.path +
+                          '/' +
+                          DateTime.now().millisecondsSinceEpoch.toString() +
+                          '.png');
+                      Navigator.pop(context, image);
+                    }).catchError((onError) {
+                      print(onError);
+                    });
+                  }),
+            ],
+            backgroundColor: widget.appBarColor,
+          ),
+          /* bottomNavigationBar: openbottomsheet
               ? new Container()
               : Container(
                   decoration: BoxDecoration(
@@ -556,8 +655,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       ),
                     ],
                   ),
-                )),
-    );
+                )), */
+    ));
   }
 
   void bottomsheets() {

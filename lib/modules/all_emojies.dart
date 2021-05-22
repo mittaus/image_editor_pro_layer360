@@ -24,7 +24,7 @@ class _EmojiesState extends State<Emojies> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  new Text("Select Emoji"),
+                  new Text("Elija emoticono"),
                 ],
               ),
             ),
