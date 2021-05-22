@@ -20,6 +20,7 @@ dependencies:
   screenshot: ^0.1.1
   signature: ^3.0.0
   flutter_colorpicker: ^0.3.2
+  image_cropper:
 dev_dependencies:
   flutter_test:
     sdk: flutter

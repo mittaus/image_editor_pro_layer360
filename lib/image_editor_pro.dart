@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_editor_pro/modules/all_emojies.dart';
 import 'package:image_editor_pro/modules/bottombar_container.dart';
@@ -223,33 +224,32 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       BottomBarContainer(
                         iconColor: widget.appBarColor,
                         colors: Colors.white,
-                        icons: FontAwesomeIcons.brush,
-                        ontap: () {
+                        icons: FontAwesomeIcons.cut,
+                        ontap: () async{
                           // raise the [showDialog] widget
-                          showDialog(
-                              context: context,
-                              child: AlertDialog(
-                                title: const Text('Elije un color'),
-                                content: SingleChildScrollView(
-                                  child: ColorPicker(
-                                    pickerColor: pickerColor,
-                                    onColorChanged: changeColor,
-                                    showLabel: true,
-                                    pickerAreaHeightPercent: 0.8,
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    child: const Text('Entendido'),
-                                    onPressed: () {
-                                      setState(() => currentColor = pickerColor);
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              ));
+                          if(_image!=null){
+                            File croppedFile = await ImageCropper.cropImage(
+                            sourcePath: _image.path,
+                            aspectRatioPresets: [
+                              CropAspectRatioPreset.square,
+                              CropAspectRatioPreset.ratio3x2,
+                              CropAspectRatioPreset.original,
+                              CropAspectRatioPreset.ratio4x3,
+                              CropAspectRatioPreset.ratio16x9
+                            ],
+                            androidUiSettings: AndroidUiSettings(
+                                toolbarTitle: 'Cropper',
+                                toolbarColor: Colors.deepOrange,
+                                toolbarWidgetColor: Colors.white,
+                                initAspectRatio: CropAspectRatioPreset.original,
+                                lockAspectRatio: false),
+                            iosUiSettings: IOSUiSettings(
+                              minimumAspectRatio: 1.0,
+                            )
+                          );
+                          }
                         },
-                        title: 'Brocha',
+                        title: 'Cortar',
                       ),
                       BottomBarContainer(
                         iconColor: widget.appBarColor,
