@@ -732,7 +732,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                             image.readAsBytesSync());
 
                                     setState(() {
-                                      height = decodedImage.height.toDouble();
+                                      height = decodedImage.height.toDouble()-(2*kBottomNavigationBarHeight);
                                       width = decodedImage.width.toDouble();
                                       _image = image;
                                     });
@@ -761,7 +761,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                       image.readAsBytesSync());
 
                                   setState(() {
-                                    height = decodedImage.height.toDouble();
+                                    height = decodedImage.height.toDouble()-(2*kBottomNavigationBarHeight);
                                     width = decodedImage.width.toDouble();
                                     _image = image;
                                   });
