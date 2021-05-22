@@ -211,7 +211,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                   decoration: BoxDecoration(
                       color: widget.bottomBarColor,
                       boxShadow: [BoxShadow(blurRadius: 10.9)]),
-                  height: 70,
+                  height: kBottomNavigationBarHeight,
                   child: new ListView(
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
@@ -454,6 +454,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
             color: Colors.white,
             height: kBottomNavigationBarHeight,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 new IconButton(
                     icon: Icon(FontAwesomeIcons.boxes),
