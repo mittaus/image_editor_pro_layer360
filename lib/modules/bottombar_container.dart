@@ -16,7 +16,8 @@ class BottomBarContainer extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 5,
       color: colors,
       child: Material(
-        color: Colors.black87,
+        //color: Colors.black87,
+        color: colors,
         child: InkWell(
           onTap: ontap,
           child: new Column(
@@ -30,10 +31,10 @@ class BottomBarContainer extends StatelessWidget {
               new SizedBox(
                 height: 4,
               ),
-              new Text(
+              /* new Text(
                 title,
                 style: TextStyle(color: Colors.white),
-              )
+              ) */
             ],
           ),
         ),

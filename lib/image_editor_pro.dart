@@ -249,8 +249,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         title: 'Brocha',
                       ),
                       BottomBarContainer(
-                        iconColor: Colors.white,
-                        colors: widget.appBarColor,
+                        iconColor: widget.appBarColor,
+                        colors: Colors.white,
                         icons: FontAwesomeIcons.smile,
                         ontap: () {
                           Future getemojis = showModalBottomSheet(
@@ -271,8 +271,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         title: 'Emoticono',
                       ),
                       BottomBarContainer(
-                        iconColor: Colors.white,
-                        colors: widget.appBarColor,
+                        iconColor: widget.appBarColor,
+                        colors: Colors.white,
                         icons: Icons.text_fields,
                         ontap: () async {
                           final value = await Navigator.push(
@@ -292,8 +292,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         title: 'Texto',
                       ),
                       BottomBarContainer(
-                        iconColor: Colors.white,
-                        colors: widget.appBarColor,
+                        iconColor: widget.appBarColor,
+                        colors: Colors.white,
                         icons: FontAwesomeIcons.eraser,
                         ontap: () {
                           _controller.clear();
