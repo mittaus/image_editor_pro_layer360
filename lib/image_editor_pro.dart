@@ -228,7 +228,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         ontap: () async{
                           // raise the [showDialog] widget
                           if(_image!=null){
-                            File croppedFile = await ImageCropper.cropImage(
+                            _image= await ImageCropper.cropImage(
                             sourcePath: _image.path,
                             aspectRatioPresets: [
                               CropAspectRatioPreset.square,
@@ -238,8 +238,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               CropAspectRatioPreset.ratio16x9
                             ],
                             androidUiSettings: AndroidUiSettings(
-                                toolbarTitle: 'Cropper',
-                                toolbarColor: Colors.deepOrange,
+                                toolbarTitle: 'Cortar Imagen',
+                                toolbarColor: widget.appBarColor,
                                 toolbarWidgetColor: Colors.white,
                                 initAspectRatio: CropAspectRatioPreset.original,
                                 lockAspectRatio: false),
@@ -247,6 +247,9 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               minimumAspectRatio: 1.0,
                             )
                           );
+                          setState(() {
+                            
+                          });
                           }
                         },
                         title: 'Cortar',
