@@ -19,8 +19,8 @@ import 'package:signature/signature.dart';
 
 TextEditingController heightcontroler = TextEditingController();
 TextEditingController widthcontroler = TextEditingController();
-var width = 300;
-var height = 300;
+double width = 300;
+double height = 300;
 
 List fontsize = [];
 var howmuchwidgetis = 0;
@@ -99,7 +99,12 @@ class _ImageEditorProState extends State<ImageEditorPro> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size=MediaQuery.of(context).size;
     
+    setState(() {
+      width=size.width;
+      height=size.height-(2*kBottomNavigationBarHeight);  
+    });
     return SafeArea(
       child: Scaffold(
           backgroundColor: Colors.grey,
@@ -366,7 +371,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                             _image != null
                                 ? Image.file(
                                     _image,
-                                    height: height.toDouble()-(kBottomNavigationBarHeight*2),
+                                    height: height.toDouble(),
                                     width: width.toDouble(),
                                     fit: BoxFit.cover,
                                   )
@@ -468,8 +473,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                 FlatButton(
                                     onPressed: () {
                                       setState(() {
-                                        height = int.parse(heightcontroler.text);
-                                        width = int.parse(widthcontroler.text);
+                                        height = double.parse(heightcontroler.text);
+                                        width = double.parse(widthcontroler.text);
                                       });
                                       heightcontroler.clear();
                                       widthcontroler.clear();
@@ -727,8 +732,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                             image.readAsBytesSync());
 
                                     setState(() {
-                                      height = decodedImage.height;
-                                      width = decodedImage.width;
+                                      height = decodedImage.height.toDouble();
+                                      width = decodedImage.width.toDouble();
                                       _image = image;
                                     });
                                     setState(() => _controller.clear());
@@ -756,8 +761,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                       image.readAsBytesSync());
 
                                   setState(() {
-                                    height = decodedImage.height;
-                                    width = decodedImage.width;
+                                    height = decodedImage.height.toDouble();
+                                    width = decodedImage.width.toDouble();
                                     _image = image;
                                   });
                                   setState(() => _controller.clear());
