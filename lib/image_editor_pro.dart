@@ -67,6 +67,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   final GlobalKey container = GlobalKey();
   final GlobalKey globalKey = new GlobalKey();
   File _image;
+  String descripcion;
   ScreenshotController screenshotController = ScreenshotController();
   Timer timeprediction;
   void timers() {
@@ -546,6 +547,12 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       decoration: InputDecoration(
                         hintText: 'Añade una descripción',
                       ),
+                      onChanged: (value){
+                        descripcion=value;
+                        setState(() {
+                          
+                        });
+                      },
                     ),
                   ),
                   Container(
@@ -572,7 +579,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                 '/' +
                                 DateTime.now().millisecondsSinceEpoch.toString() +
                                 '.png');
-                            Navigator.pop(context, image);
+                            Navigator.pop(context, [image, descripcion]);
                           }).catchError((onError) {
                             print(onError);
                           });
