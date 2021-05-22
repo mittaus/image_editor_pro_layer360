@@ -543,10 +543,12 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       bottomsheets();
                 }),
                 Flexible(
-                  child: TextFormField(
-                    /* decoration: InputDecoration(
-                      hintText: 'Añade una descripción',
-                    ), */
+                  child: SingleChildScrollView(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Añade una descripción',
+                      ),
+                    ),
                   ),
                 ),
                 Container(
