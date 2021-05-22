@@ -336,7 +336,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         BottomBarContainer(
                           iconColor: widget.appBarColor,
                           colors: Colors.white,
-                          icons: FontAwesomeIcons.brush,
+                          icons: FontAwesomeIcons.paintBrush,
                           ontap: () {
                             // raise the [showDialog] widget
                             showDialog(
