@@ -23,27 +23,30 @@ class _TextEditorState extends State<TextEditor> {
               icon: Icon(FontAwesomeIcons.alignRight), onPressed: () {}),
         ],
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextField(
-                controller: name,
-                decoration: InputDecoration(
-                  hintText: "Ingrese su mensaje",
-                  hintStyle: TextStyle(color: Colors.black),
-                  alignLabelWithHint: true,
-                ),
-                scrollPadding: EdgeInsets.all(20.0),
-                keyboardType: TextInputType.multiline,
-                maxLines: 99999,
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-                autofocus: true,
-              )
-            ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextField(
+                  controller: name,
+                  decoration: InputDecoration(
+                    hintText: "Ingrese su mensaje",
+                    hintStyle: TextStyle(color: Colors.black),
+                    alignLabelWithHint: true,
+                  ),
+                  scrollPadding: EdgeInsets.all(20.0),
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 99999,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                  autofocus: true,
+                )
+              ],
+            ),
           ),
         ),
       ),
