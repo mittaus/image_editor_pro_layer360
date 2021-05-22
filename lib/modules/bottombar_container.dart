@@ -5,9 +5,10 @@ class BottomBarContainer extends StatelessWidget {
   final Function ontap;
   final String title;
   final IconData icons;
+  final Color iconColor;
 
   const BottomBarContainer(
-      {Key key, this.ontap, this.title, this.icons, this.colors})
+      {Key key, this.ontap, this.title, this.icons, this.colors, this.iconColor=Colors.white})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class BottomBarContainer extends StatelessWidget {
             children: <Widget>[
               new Icon(
                 icons,
-                color: Colors.white,
+                color: iconColor,
               ),
               new SizedBox(
                 height: 4,
