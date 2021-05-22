@@ -459,12 +459,12 @@ class _ImageEditorProState extends State<ImageEditorPro> {
             color: Colors.white,
             height: kBottomNavigationBarHeight,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                new IconButton(
-                    icon: Icon(FontAwesomeIcons.boxes),
-                    onPressed: () {
-                      showCupertinoDialog(
+                /* new IconButton(
+                  icon: Icon(FontAwesomeIcons.boxes),
+                  onPressed: () {
+                    showCupertinoDialog(
                           context: context,
                           builder: (context) {
                             return AlertDialog(
@@ -521,19 +521,44 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               ),
                             );
                           });
-                    }),
-                new IconButton(
+                }), */
+                /* new IconButton(
                     icon: Icon(Icons.clear),
                     onPressed: () {
                       _controller.points.clear();
                       setState(() {});
-                    }),
+                    }), */
                 new IconButton(
                     icon: Icon(Icons.camera),
                     onPressed: () {
                       bottomsheets();
-                    }),
-                BottomBarContainer(
+                }),
+                new IconButton(
+                  color: widget.appBarColor,
+                  icon: Icon(Icons.navigate_next, color: Colors.white,),
+                  onPressed: () {
+                      File _imageFile;
+                      _imageFile = null;
+                      screenshotController
+                          .capture(
+                              delay: Duration(milliseconds: 500), pixelRatio: 1.5)
+                          .then((File image) async {
+                        //print("Capture Done");
+                        setState(() {
+                          _imageFile = image;
+                        });
+                        final paths = await getExternalStorageDirectory();
+                        image.copy(paths.path +
+                            '/' +
+                            DateTime.now().millisecondsSinceEpoch.toString() +
+                            '.png');
+                        Navigator.pop(context, image);
+                      }).catchError((onError) {
+                        print(onError);
+                      });
+                    }
+                ),
+                /* BottomBarContainer(
                   colors: widget.appBarColor,
                   iconColor: Colors.white,
                   icons: Icons.navigate_next,
@@ -553,8 +578,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     }
                   },
                   title: 'Aceptar',
-                ),
-                new FlatButton(
+                ), */
+                /* new FlatButton(
                     child: new Text("Aceptar"),
                     textColor: Colors.white,
                     onPressed: () {
@@ -577,7 +602,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       }).catchError((onError) {
                         print(onError);
                       });
-                    }),
+                    }
+                ), */
               ],
               
             ),
