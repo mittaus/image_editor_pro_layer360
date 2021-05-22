@@ -450,106 +450,131 @@ class _ImageEditorProState extends State<ImageEditorPro> {
               ),
             ],
           ),
-          bottomNavigationBar: Row(
-            children: <Widget>[
-              new IconButton(
-                  icon: Icon(FontAwesomeIcons.boxes),
-                  onPressed: () {
-                    showCupertinoDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: new Text("Seleccionar ancho y alto"),
-                            actions: <Widget>[
-                              FlatButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      height = int.parse(heightcontroler.text);
-                                      width = int.parse(widthcontroler.text);
-                                    });
-                                    heightcontroler.clear();
-                                    widthcontroler.clear();
-                                    Navigator.pop(context);
-                                  },
-                                  child: new Text("Aceptar"))
-                            ],
-                            content: new SingleChildScrollView(
-                              child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  new Text("Definir altura"),
-                                  new SizedBox(
-                                    height: 10,
-                                  ),
-                                  TextField(
-                                      controller: heightcontroler,
-                                      keyboardType:
-                                          TextInputType.numberWithOptions(),
-                                      decoration: InputDecoration(
-                                          hintText: 'Altura',
-                                          contentPadding:
-                                              EdgeInsets.only(left: 10),
-                                          border: OutlineInputBorder())),
-                                  new SizedBox(
-                                    height: 10,
-                                  ),
-                                  new Text("Definir ancho"),
-                                  new SizedBox(
-                                    height: 10,
-                                  ),
-                                  TextField(
-                                      controller: widthcontroler,
-                                      keyboardType:
-                                          TextInputType.numberWithOptions(),
-                                      decoration: InputDecoration(
-                                          hintText: 'Ancho',
-                                          contentPadding:
-                                              EdgeInsets.only(left: 10),
-                                          border: OutlineInputBorder())),
-                                ],
+          bottomNavigationBar: Container(
+            color: Colors.white,
+            height: kBottomNavigationBarHeight,
+            child: Row(
+              children: <Widget>[
+                new IconButton(
+                    icon: Icon(FontAwesomeIcons.boxes),
+                    onPressed: () {
+                      showCupertinoDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: new Text("Seleccionar ancho y alto"),
+                              actions: <Widget>[
+                                FlatButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        height = int.parse(heightcontroler.text);
+                                        width = int.parse(widthcontroler.text);
+                                      });
+                                      heightcontroler.clear();
+                                      widthcontroler.clear();
+                                      Navigator.pop(context);
+                                    },
+                                    child: new Text("Aceptar"))
+                              ],
+                              content: new SingleChildScrollView(
+                                child: new Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    new Text("Definir altura"),
+                                    new SizedBox(
+                                      height: 10,
+                                    ),
+                                    TextField(
+                                        controller: heightcontroler,
+                                        keyboardType:
+                                            TextInputType.numberWithOptions(),
+                                        decoration: InputDecoration(
+                                            hintText: 'Altura',
+                                            contentPadding:
+                                                EdgeInsets.only(left: 10),
+                                            border: OutlineInputBorder())),
+                                    new SizedBox(
+                                      height: 10,
+                                    ),
+                                    new Text("Definir ancho"),
+                                    new SizedBox(
+                                      height: 10,
+                                    ),
+                                    TextField(
+                                        controller: widthcontroler,
+                                        keyboardType:
+                                            TextInputType.numberWithOptions(),
+                                        decoration: InputDecoration(
+                                            hintText: 'Ancho',
+                                            contentPadding:
+                                                EdgeInsets.only(left: 10),
+                                            border: OutlineInputBorder())),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          });
+                    }),
+                new IconButton(
+                    icon: Icon(Icons.clear),
+                    onPressed: () {
+                      _controller.points.clear();
+                      setState(() {});
+                    }),
+                new IconButton(
+                    icon: Icon(Icons.camera),
+                    onPressed: () {
+                      bottomsheets();
+                    }),
+                BottomBarContainer(
+                  colors: widget.appBarColor,
+                  iconColor: Colors.white,
+                  icons: Icons.navigate_next,
+                  ontap: () async {
+                    final value = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TextEditor()));
+                    if (value.toString().isEmpty) {
+                      print("true");
+                    } else {
+                      type.add(2);
+                      fontsize.add(20);
+                      offsets.add(Offset.zero);
+                      multiwidget.add(value);
+                      howmuchwidgetis++;
+                    }
+                  },
+                  title: 'Aceptar',
+                ),
+                new FlatButton(
+                    child: new Text("Aceptar"),
+                    textColor: Colors.white,
+                    onPressed: () {
+                      File _imageFile;
+                      _imageFile = null;
+                      screenshotController
+                          .capture(
+                              delay: Duration(milliseconds: 500), pixelRatio: 1.5)
+                          .then((File image) async {
+                        //print("Capture Done");
+                        setState(() {
+                          _imageFile = image;
                         });
-                  }),
-              new IconButton(
-                  icon: Icon(Icons.clear),
-                  onPressed: () {
-                    _controller.points.clear();
-                    setState(() {});
-                  }),
-              new IconButton(
-                  icon: Icon(Icons.camera),
-                  onPressed: () {
-                    bottomsheets();
-                  }),
-              new FlatButton(
-                  child: new Text("Aceptar"),
-                  textColor: Colors.white,
-                  onPressed: () {
-                    File _imageFile;
-                    _imageFile = null;
-                    screenshotController
-                        .capture(
-                            delay: Duration(milliseconds: 500), pixelRatio: 1.5)
-                        .then((File image) async {
-                      //print("Capture Done");
-                      setState(() {
-                        _imageFile = image;
+                        final paths = await getExternalStorageDirectory();
+                        image.copy(paths.path +
+                            '/' +
+                            DateTime.now().millisecondsSinceEpoch.toString() +
+                            '.png');
+                        Navigator.pop(context, image);
+                      }).catchError((onError) {
+                        print(onError);
                       });
-                      final paths = await getExternalStorageDirectory();
-                      image.copy(paths.path +
-                          '/' +
-                          DateTime.now().millisecondsSinceEpoch.toString() +
-                          '.png');
-                      Navigator.pop(context, image);
-                    }).catchError((onError) {
-                      print(onError);
-                    });
-                  }),
-            ],
-            
+                    }),
+              ],
+              
+            ),
           ),
           /* bottomNavigationBar: openbottomsheet
               ? new Container()
