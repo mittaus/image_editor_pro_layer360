@@ -579,7 +579,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                 '/' +
                                 DateTime.now().millisecondsSinceEpoch.toString() +
                                 '.png');
-                            Navigator.pop(context, [image, descripcion]);
+                            Navigator.pop(context, [image, descripcion?.trim()]);
                           }).catchError((onError) {
                             print(onError);
                           });
