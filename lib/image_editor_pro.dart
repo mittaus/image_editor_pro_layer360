@@ -296,7 +296,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           child: BottomBarContainer(
                             iconColor: widget.appBarColor,
                             colors: Colors.white,
-                            icons: Icons.text_fields,
+                            icons: Icons.text_fields_sharp,
                             ontap: () async {
                               final value = await Navigator.push(
                                   context,
@@ -307,7 +307,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               } else {
                                 type.add(2);
                                 fontsize.add(20);
-                                offsets.add(Offset.zero);
+                                offsets.add(Offset(width/2,height/2));
                                 multiwidget.add(value);
                                 howmuchwidgetis++;
                               }

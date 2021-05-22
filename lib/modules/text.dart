@@ -11,9 +11,9 @@ class _TextEditorState extends State<TextEditor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: new AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xFF009ee0),
         actions: <Widget>[
           new IconButton(
               icon: Icon(FontAwesomeIcons.alignLeft), onPressed: () {}),
@@ -32,7 +32,7 @@ class _TextEditorState extends State<TextEditor> {
                 controller: name,
                 decoration: InputDecoration(
                   hintText: "Ingrese su mensaje",
-                  hintStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.black),
                   alignLabelWithHint: true,
                 ),
                 scrollPadding: EdgeInsets.all(20.0),
@@ -48,7 +48,7 @@ class _TextEditorState extends State<TextEditor> {
         ),
       ),
       bottomNavigationBar: new Container(
-        color: Colors.black,
+        color: Colors.white,
         padding: EdgeInsets.all(10),
         child: new FlatButton(
             onPressed: () {
