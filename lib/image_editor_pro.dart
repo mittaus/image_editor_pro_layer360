@@ -239,8 +239,9 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                             ],
                             androidUiSettings: AndroidUiSettings(
                                 toolbarTitle: 'Cortar Imagen',
-                                toolbarColor: widget.appBarColor,
-                                toolbarWidgetColor: Colors.white,
+                                toolbarColor: widget.bottomBarColor,
+                                
+                                toolbarWidgetColor: widget.appBarColor,
                                 initAspectRatio: CropAspectRatioPreset.original,
                                 lockAspectRatio: false),
                             iosUiSettings: IOSUiSettings(
