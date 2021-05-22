@@ -533,13 +533,13 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     onPressed: () {
                       bottomsheets();
                 }),
-                Container(
+                /* Container(
                   child: TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Añade una descripción',
                     ),
                   ),
-                ),
+                ), */
                 Container(
                   decoration: BoxDecoration(
                     color: widget.appBarColor,
