@@ -366,7 +366,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                             _image != null
                                 ? Image.file(
                                     _image,
-                                    height: height.toDouble(),
+                                    height: height.toDouble()-(kBottomNavigationBarHeight*2),
                                     width: width.toDouble(),
                                     fit: BoxFit.cover,
                                   )
