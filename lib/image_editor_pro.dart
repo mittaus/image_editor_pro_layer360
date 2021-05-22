@@ -463,11 +463,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
-          bottomNavigationBar: Center(
-            child: Container(
+                Container(
               color: Colors.white,
               height: kBottomNavigationBarHeight,
               child: Row(
@@ -632,8 +628,14 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                 ],
                 
               ),
+            )
+                
+              ],
             ),
           ),
+          /* bottomNavigationBar: Center(
+            ,
+          ), */
           /* bottomNavigationBar: openbottomsheet
               ? new Container()
               : Container(
