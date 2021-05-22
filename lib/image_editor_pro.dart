@@ -381,12 +381,17 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           child: Stack(
                             children: <Widget>[
                               _image != null
-                                  ? Image.file(
-                                    _image,
-                                    //height: height.toDouble(),
-                                    //width: width.toDouble(),
-                                    //fit: BoxFit.cover,
-                                      
+                                  ? Container(
+                                    color: Colors.black,
+                                    child: Center(
+                                      child: Image.file(
+                                            _image,
+                                            /* height: height.toDouble(),
+                                            width: width.toDouble(),
+                                            fit: BoxFit.cover, */
+                                          
+                                      ),
+                                    ),
                                   )
                                   : Container(),
                               Container(
