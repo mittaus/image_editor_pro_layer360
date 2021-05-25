@@ -564,9 +564,9 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       onPressed: () {
                         bottomsheets();
                   }),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: Flexible(
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: TextFormField(
                         maxLines: 3,
                         decoration: InputDecoration(
