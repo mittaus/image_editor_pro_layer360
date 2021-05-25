@@ -581,35 +581,38 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       ),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: widget.appBarColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: new IconButton(
-                      color: widget.appBarColor,
-                      icon: Icon(Icons.navigate_next, color: Colors.white,),
-                      onPressed: () {
-                          File _imageFile;
-                          _imageFile = null;
-                          screenshotController
-                              .capture(
-                                  delay: Duration(milliseconds: 500), pixelRatio: 1.5)
-                              .then((File image) async {
-                            //print("Capture Done");
-                            setState(() {
-                              _imageFile = image;
+                  Padding(
+                    padding: const EdgeInsets.only(right: 2),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: widget.appBarColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: new IconButton(
+                        color: widget.appBarColor,
+                        icon: Icon(Icons.navigate_next, color: Colors.white,),
+                        onPressed: () {
+                            File _imageFile;
+                            _imageFile = null;
+                            screenshotController
+                                .capture(
+                                    delay: Duration(milliseconds: 500), pixelRatio: 1.5)
+                                .then((File image) async {
+                              //print("Capture Done");
+                              setState(() {
+                                _imageFile = image;
+                              });
+                              final paths = await getExternalStorageDirectory();
+                              image.copy(paths.path +
+                                  '/' +
+                                  DateTime.now().millisecondsSinceEpoch.toString() +
+                                  '.png');
+                              Navigator.pop(context, [image, descripcion?.trim()]);
+                            }).catchError((onError) {
+                              print(onError);
                             });
-                            final paths = await getExternalStorageDirectory();
-                            image.copy(paths.path +
-                                '/' +
-                                DateTime.now().millisecondsSinceEpoch.toString() +
-                                '.png');
-                            Navigator.pop(context, [image, descripcion?.trim()]);
-                          }).catchError((onError) {
-                            print(onError);
-                          });
-                        }
+                          }
+                      ),
                     ),
                   ),
                   /* BottomBarContainer(
