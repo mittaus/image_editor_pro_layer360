@@ -564,17 +564,21 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       onPressed: () {
                         bottomsheets();
                   }),
-                  Flexible(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Añade una descripción',
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Flexible(
+                      child: TextFormField(
+                        maxLines: 3,
+                        decoration: InputDecoration(
+                          hintText: 'Añade una descripción',
+                        ),
+                        onChanged: (value){
+                          descripcion=value;
+                          setState(() {
+                            
+                          });
+                        },
                       ),
-                      onChanged: (value){
-                        descripcion=value;
-                        setState(() {
-                          
-                        });
-                      },
                     ),
                   ),
                   Container(
