@@ -582,7 +582,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 2),
+                    padding: const EdgeInsets.only(right: 5, left:5),
                     child: Container(
                       decoration: BoxDecoration(
                         color: widget.appBarColor,
