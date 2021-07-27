@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,7 @@ var howmuchwidgetis = 0;
 List multiwidget = [];
 Color currentcolors = Colors.white;
 var opicity = 0.0;
-SignatureController _controller =
-    SignatureController(penStrokeWidth: 5, penColor: Colors.green);
+SignatureController _controller = SignatureController(penStrokeWidth: 5, penColor: Colors.green);
 
 class ImageEditorPro extends StatefulWidget {
   final Color appBarColor;
@@ -51,8 +51,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   void changeColor(Color color) {
     setState(() => pickerColor = color);
     var points = _controller.points;
-    _controller =
-        SignatureController(penStrokeWidth: 5, penColor: color, points: points);
+    _controller = SignatureController(penStrokeWidth: 5, penColor: color, points: points);
   }
 
   List<Offset> offsets = [];
@@ -70,7 +69,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   String descripcion;
   ScreenshotController screenshotController = ScreenshotController();
   Timer timeprediction;
-  double aspectRadio=1;
+  double aspectRadio = 1;
   void timers() {
     Timer.periodic(Duration(milliseconds: 10), (tim) {
       setState(() {});
@@ -95,24 +94,23 @@ class _ImageEditorProState extends State<ImageEditorPro> {
     multiwidget.clear();
     howmuchwidgetis = 0;
     // TODO: implement initState
-    Future.delayed(Duration(milliseconds: 500), ()=>bottomsheets());
+    Future.delayed(Duration(milliseconds: 500), () => bottomsheets());
     super.initState();
-    
   }
 
   @override
   Widget build(BuildContext context) {
-    final Size size=MediaQuery.of(context).size;
-    
+    final Size size = MediaQuery.of(context).size;
+
     setState(() {
-      width=size.width;
-      height=size.height-(2*kBottomNavigationBarHeight);
+      width = size.width;
+      height = size.height - (2 * kBottomNavigationBarHeight);
     });
     return SafeArea(
-      child: Scaffold(
-          backgroundColor: Colors.grey,
-          key: scaf,
-          /* appBar: new AppBar(
+        child: Scaffold(
+      backgroundColor: Colors.grey,
+      key: scaf,
+      /* appBar: new AppBar(
             actions: <Widget>[
               new IconButton(
                   icon: Icon(FontAwesomeIcons.boxes),
@@ -213,126 +211,117 @@ class _ImageEditorProState extends State<ImageEditorPro> {
             ],
             backgroundColor: widget.appBarColor,
           ), */
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                        color: widget.bottomBarColor,
-                        boxShadow: [BoxShadow(blurRadius: 10.9)]),
-                    height: kBottomNavigationBarHeight,
-                    child: new ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        Tooltip(
-                          message: 'Cortar',
-                          child: BottomBarContainer(
-                            iconColor: widget.appBarColor,
-                            colors: Colors.white,
-                            icons: FontAwesomeIcons.cut,
-                            ontap: () async{
-                              // raise the [showDialog] widget
-                              if(_image!=null){
-                                File resultImage= await ImageCropper.cropImage(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(color: widget.bottomBarColor, boxShadow: [BoxShadow(blurRadius: 10.9)]),
+              height: kBottomNavigationBarHeight,
+              child: new ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Tooltip(
+                    message: 'Cortar',
+                    child: BottomBarContainer(
+                      iconColor: widget.appBarColor,
+                      colors: Colors.white,
+                      icons: FontAwesomeIcons.cut,
+                      ontap: () async {
+                        // raise the [showDialog] widget
+                        if (_image != null) {
+                          File resultImage = await ImageCropper.cropImage(
+                              sourcePath: _image.path,
+                              aspectRatioPresets: [
+                                CropAspectRatioPreset.square,
+                                CropAspectRatioPreset.ratio3x2,
+                                CropAspectRatioPreset.original,
+                                CropAspectRatioPreset.ratio4x3,
+                                CropAspectRatioPreset.ratio16x9
+                              ],
+                              androidUiSettings: AndroidUiSettings(
+                                  toolbarTitle: 'Cortar Imagen',
+                                  toolbarColor: widget.appBarColor,
+                                  toolbarWidgetColor: Colors.white,
 
-                                  sourcePath: _image.path,
-                                  aspectRatioPresets: [
-                                    CropAspectRatioPreset.square,
-                                    CropAspectRatioPreset.ratio3x2,
-                                    CropAspectRatioPreset.original,
-                                    CropAspectRatioPreset.ratio4x3,
-                                    CropAspectRatioPreset.ratio16x9
-                                  ],
-                                  androidUiSettings: AndroidUiSettings(
-                                      toolbarTitle: 'Cortar Imagen',
-                                      toolbarColor: widget.appBarColor,
-                                      toolbarWidgetColor: Colors.white,
-
-                                      //toolbarWidgetColor:widget.appBarColor,
-                                      initAspectRatio: CropAspectRatioPreset.original,
-                                      lockAspectRatio: false),
-                                  iosUiSettings: IOSUiSettings(
-                                    minimumAspectRatio: 1.0,
-                                  )
-                              );
-                                if(resultImage!=null){
-                                  _image=resultImage;
-                                }
-                              setState(() {
-                                
-                              });
-                              }
-                            },
-                            title: 'Cortar',
-                          ),
-                        ),
-                        Tooltip(
-                          message: 'Emoticono',
-                          child: BottomBarContainer(
-                            iconColor: widget.appBarColor,
-                            colors: Colors.white,
-                            icons: FontAwesomeIcons.smile,
-                            ontap: () {
-                              Future getemojis = showModalBottomSheet(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Emojies();
-                                  });
-                              getemojis.then((value) {
-                                if (value != null) {
-                                  type.add(1);
-                                  fontsize.add(20);
-                                  offsets.add(Offset.zero);
-                                  multiwidget.add(value);
-                                  howmuchwidgetis++;
-                                }
-                              });
-                            },
-                            title: 'Emoticono',
-                          ),
-                        ),
-                        Tooltip(
-                          message: 'Texto',
-                          child: BottomBarContainer(
-                            iconColor: widget.appBarColor,
-                            colors: Colors.white,
-                            icons: Icons.text_fields_sharp,
-                            ontap: () async {
-                              final value = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => TextEditor()));
-                              if (value.toString().isEmpty || value.toString().trim()=='' ) {
-                                print("true");
-                              } else {
-                                type.add(2);
-                                fontsize.add(20);
-                                offsets.add(Offset(width/2,height/2));
-                                multiwidget.add(value);
-                                howmuchwidgetis++;
-                              }
-                            },
-                            title: 'Texto',
-                          ),
-                        ),
-                        Tooltip(
-                          message: 'Borrador',
-                          child: BottomBarContainer(
-                            iconColor: widget.appBarColor,
-                            colors: Colors.white,
-                            icons: FontAwesomeIcons.eraser,
-                            ontap: () {
-                              _controller.clear();
-                              type.clear();
-                              fontsize.clear();
-                              offsets.clear();
-                              multiwidget.clear();
-                              howmuchwidgetis = 0;
-                            },
-                            title: 'Borrador',
-                          ),
-                        ),
-                        /* BottomBarContainer(
+                                  //toolbarWidgetColor:widget.appBarColor,
+                                  initAspectRatio: CropAspectRatioPreset.original,
+                                  lockAspectRatio: false),
+                              iosUiSettings: IOSUiSettings(
+                                minimumAspectRatio: 1.0,
+                              ));
+                          if (resultImage != null) {
+                            _image = resultImage;
+                          }
+                          setState(() {});
+                        }
+                      },
+                      title: 'Cortar',
+                    ),
+                  ),
+                  Tooltip(
+                    message: 'Emoticono',
+                    child: BottomBarContainer(
+                      iconColor: widget.appBarColor,
+                      colors: Colors.white,
+                      icons: FontAwesomeIcons.smile,
+                      ontap: () {
+                        Future getemojis = showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Emojies();
+                            });
+                        getemojis.then((value) {
+                          if (value != null) {
+                            type.add(1);
+                            fontsize.add(20);
+                            offsets.add(Offset.zero);
+                            multiwidget.add(value);
+                            howmuchwidgetis++;
+                          }
+                        });
+                      },
+                      title: 'Emoticono',
+                    ),
+                  ),
+                  Tooltip(
+                    message: 'Texto',
+                    child: BottomBarContainer(
+                      iconColor: widget.appBarColor,
+                      colors: Colors.white,
+                      icons: Icons.text_fields_sharp,
+                      ontap: () async {
+                        final value = await Navigator.push(context, MaterialPageRoute(builder: (context) => TextEditor()));
+                        if (value.toString().isEmpty || value.toString().trim() == '') {
+                          print("true");
+                        } else {
+                          type.add(2);
+                          fontsize.add(20);
+                          offsets.add(Offset(width / 2, height / 2));
+                          multiwidget.add(value);
+                          howmuchwidgetis++;
+                        }
+                      },
+                      title: 'Texto',
+                    ),
+                  ),
+                  Tooltip(
+                    message: 'Borrador',
+                    child: BottomBarContainer(
+                      iconColor: widget.appBarColor,
+                      colors: Colors.white,
+                      icons: FontAwesomeIcons.eraser,
+                      ontap: () {
+                        _controller.clear();
+                        type.clear();
+                        fontsize.clear();
+                        offsets.clear();
+                        multiwidget.clear();
+                        howmuchwidgetis = 0;
+                      },
+                      title: 'Borrador',
+                    ),
+                  ),
+                  /* BottomBarContainer(
                           iconColor: widget.appBarColor,
                           colors: Colors.white,
                           icons: Icons.photo,
@@ -345,95 +334,113 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           },
                           title: 'Filtro',
                         ), */
-                        Tooltip(
-                          message: 'Pincel',
-                          child: BottomBarContainer(
-                            iconColor: widget.appBarColor,
-                            colors: Colors.white,
-                            icons: FontAwesomeIcons.paintBrush,
-                            ontap: () {
-                              // raise the [showDialog] widget
-                              showDialog(
-                                  context: context,
-                                  child: AlertDialog(
-                                    title: const Text('Elije un color'),
-                                    content: SingleChildScrollView(
-                                      child: ColorPicker(
-                                        pickerColor: pickerColor,
-                                        onColorChanged: changeColor,
-                                        showLabel: true,
-                                        pickerAreaHeightPercent: 0.8,
-                                      ),
-                                    ),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        child: const Text('Entendido'),
-                                        onPressed: () {
-                                          setState(() => currentColor = pickerColor);
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  ));
-                            },
-                            title: 'Brocha',
-                          ),
-                        ),
-                        
-                      ],
+                  Tooltip(
+                    message: 'Pincel',
+                    child: BottomBarContainer(
+                      iconColor: widget.appBarColor,
+                      colors: Colors.white,
+                      icons: FontAwesomeIcons.paintBrush,
+                      ontap: () {
+                        // raise the [showDialog] widget
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Elije un color'),
+                                content: SingleChildScrollView(
+                                  child: ColorPicker(
+                                    pickerColor: pickerColor,
+                                    onColorChanged: changeColor,
+                                    showLabel: true,
+                                    pickerAreaHeightPercent: 0.8,
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: const Text('Entendido'),
+                                    onPressed: () {
+                                      setState(() => currentColor = pickerColor);
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      title: 'Brocha',
                     ),
                   ),
-                Center(
-                  child: Screenshot(
-                    controller: screenshotController,
-                    child: Container(
-                      //margin: EdgeInsets.all(20),
-                      color: Colors.white,
-                      width: width.toDouble(),
-                      height: height.toDouble()-MediaQuery.of(context).padding.top,
-                      child: RepaintBoundary(
-                          key: globalKey,
-                          child: Stack(
-                            children: <Widget>[
-                              _image != null
-                                  ? Container(
-                                    color: Colors.black,
-                                    child: Center(
-                                      child: Image.file(
-                                            _image,
-                                            /* height: height.toDouble(),
+                ],
+              ),
+            ),
+            Center(
+              child: Screenshot(
+                controller: screenshotController,
+                child: Container(
+                  //margin: EdgeInsets.all(20),
+                  color: Colors.white,
+                  width: width.toDouble(),
+                  height: height.toDouble() - MediaQuery.of(context).padding.top,
+                  child: RepaintBoundary(
+                      key: globalKey,
+                      child: Stack(
+                        children: <Widget>[
+                          _image != null
+                              ? Container(
+                                  color: Colors.black,
+                                  child: Center(
+                                    child: Image.file(
+                                      _image,
+                                      /* height: height.toDouble(),
                                             width: width.toDouble(),
                                             fit: BoxFit.cover, */
-                                          
-                                      ),
                                     ),
-                                  )
-                                  : Container(),
-                              Container(
-                                child: GestureDetector(
-                                    onPanUpdate: (DragUpdateDetails details) {
-                                      setState(() {
-                                        RenderBox object = context.findRenderObject();
-                                        Offset _localPosition = object
-                                            .globalToLocal(details.globalPosition);
-                                        _points = new List.from(_points)
-                                          ..add(_localPosition);
-                                      });
-                                    },
-                                    onPanEnd: (DragEndDetails details) {
-                                      _points.add(null);
-                                    },
-                                    child: Signat()),
-                              ),
-                              Stack(
-                                children: multiwidget.asMap().entries.map((f) {
-                                  return type[f.key] == 1
-                                      ? EmojiView(
+                                  ),
+                                )
+                              : Container(),
+                          Container(
+                            child: GestureDetector(
+                                onPanUpdate: (DragUpdateDetails details) {
+                                  setState(() {
+                                    RenderBox object = context.findRenderObject();
+                                    Offset _localPosition = object.globalToLocal(details.globalPosition);
+                                    _points = new List.from(_points)..add(_localPosition);
+                                  });
+                                },
+                                onPanEnd: (DragEndDetails details) {
+                                  _points.add(null);
+                                },
+                                child: Signat()),
+                          ),
+                          Stack(
+                            children: multiwidget.asMap().entries.map((f) {
+                              return type[f.key] == 1
+                                  ? EmojiView(
+                                      left: offsets[f.key].dx,
+                                      top: offsets[f.key].dy,
+                                      ontap: () {
+                                        scaf.currentState.showBottomSheet((context) {
+                                          return Sliders(
+                                            size: f.key,
+                                            sizevalue: fontsize[f.key].toDouble(),
+                                          );
+                                        });
+                                      },
+                                      onpanupdate: (details) {
+                                        setState(() {
+                                          offsets[f.key] = Offset(offsets[f.key].dx + details.delta.dx, offsets[f.key].dy + details.delta.dy);
+                                        });
+                                      },
+                                      value: f.value.toString(),
+                                      fontsize: fontsize[f.key].toDouble(),
+                                      align: TextAlign.center,
+                                    )
+                                  : type[f.key] == 2
+                                      ? TextView(
                                           left: offsets[f.key].dx,
                                           top: offsets[f.key].dy,
                                           ontap: () {
-                                            scaf.currentState
-                                                .showBottomSheet((context) {
+                                            scaf.currentState.showBottomSheet((context) {
                                               return Sliders(
                                                 size: f.key,
                                                 sizevalue: fontsize[f.key].toDouble(),
@@ -442,51 +449,22 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                           },
                                           onpanupdate: (details) {
                                             setState(() {
-                                              offsets[f.key] = Offset(
-                                                  offsets[f.key].dx + details.delta.dx,
-                                                  offsets[f.key].dy + details.delta.dy);
+                                              offsets[f.key] = Offset(offsets[f.key].dx + details.delta.dx, offsets[f.key].dy + details.delta.dy);
                                             });
                                           },
                                           value: f.value.toString(),
                                           fontsize: fontsize[f.key].toDouble(),
                                           align: TextAlign.center,
                                         )
-                                      : type[f.key] == 2
-                                          ? TextView(
-                                              left: offsets[f.key].dx,
-                                              top: offsets[f.key].dy,
-                                              ontap: () {
-                                                scaf.currentState
-                                                    .showBottomSheet((context) {
-                                                  return Sliders(
-                                                    size: f.key,
-                                                    sizevalue:
-                                                        fontsize[f.key].toDouble(),
-                                                  );
-                                                });
-                                              },
-                                              onpanupdate: (details) {
-                                                setState(() {
-                                                  offsets[f.key] = Offset(
-                                                      offsets[f.key].dx +
-                                                          details.delta.dx,
-                                                      offsets[f.key].dy +
-                                                          details.delta.dy);
-                                                });
-                                              },
-                                              value: f.value.toString(),
-                                              fontsize: fontsize[f.key].toDouble(),
-                                              align: TextAlign.center,
-                                            )
-                                          : new Container();
-                                }).toList(),
-                              )
-                            ],
-                          )),
-                    ),
-                  ),
+                                      : new Container();
+                            }).toList(),
+                          )
+                        ],
+                      )),
                 ),
-                Container(
+              ),
+            ),
+            Container(
               color: Colors.white,
               height: kBottomNavigationBarHeight,
               child: Row(
@@ -563,7 +541,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       icon: Icon(Icons.camera),
                       onPressed: () {
                         bottomsheets();
-                  }),
+                      }),
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -572,47 +550,42 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         decoration: InputDecoration(
                           hintText: 'Añade una descripción',
                         ),
-                        onChanged: (value){
-                          descripcion=value;
-                          setState(() {
-                            
-                          });
+                        onChanged: (value) {
+                          descripcion = value;
+                          setState(() {});
                         },
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 5, left:5),
+                    padding: const EdgeInsets.only(right: 5, left: 5),
                     child: Container(
                       decoration: BoxDecoration(
                         color: widget.appBarColor,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: new IconButton(
-                        color: widget.appBarColor,
-                        icon: Icon(Icons.navigate_next, color: Colors.white,),
-                        onPressed: () {
-                            File _imageFile;
-                            _imageFile = null;
-                            screenshotController
-                                .capture(
-                                    delay: Duration(milliseconds: 500), pixelRatio: 1.5)
-                                .then((File image) async {
+                          color: widget.appBarColor,
+                          icon: Icon(
+                            Icons.navigate_next,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            // File _imageFile;
+                            // _imageFile = null;
+                            screenshotController.capture(delay: Duration(milliseconds: 500), pixelRatio: 1.5).then((Uint8List image) async {
                               //print("Capture Done");
-                              setState(() {
-                                _imageFile = image;
-                              });
+                              File _file = File.fromRawPath(image);
+                              // setState(() {
+                              //   _imageFile = _file;
+                              // });
                               final paths = await getExternalStorageDirectory();
-                              image.copy(paths.path +
-                                  '/' +
-                                  DateTime.now().millisecondsSinceEpoch.toString() +
-                                  '.png');
+                              _file.copy(paths.path + '/' + DateTime.now().millisecondsSinceEpoch.toString() + '.png');
                               Navigator.pop(context, [image, descripcion?.trim()]);
                             }).catchError((onError) {
                               print(onError);
                             });
-                          }
-                      ),
+                          }),
                     ),
                   ),
                   /* BottomBarContainer(
@@ -662,17 +635,15 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       }
                   ), */
                 ],
-                
               ),
             )
-                
-              ],
-            ),
-          ),
-          /* bottomNavigationBar: Center(
+          ],
+        ),
+      ),
+      /* bottomNavigationBar: Center(
             ,
           ), */
-          /* bottomNavigationBar: openbottomsheet
+      /* bottomNavigationBar: openbottomsheet
               ? new Container()
               : Container(
                   decoration: BoxDecoration(
@@ -787,9 +758,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
       context: context,
       builder: (BuildContext context) {
         return new Container(
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(blurRadius: 10.9, color: Colors.grey[400])
-          ]),
+          decoration: BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(blurRadius: 10.9, color: Colors.grey[400])]),
           height: 170,
           child: new Column(
             children: <Widget>[
@@ -815,17 +784,15 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               IconButton(
                                   icon: Icon(Icons.photo_library),
                                   onPressed: () async {
-                                    var image = await ImagePicker.pickImage(
-                                        source: ImageSource.gallery);
-                                    var decodedImage =
-                                        await decodeImageFromList(
-                                            image.readAsBytesSync());
+                                    XFile image = await ImagePicker().pickImage(source: ImageSource.gallery);
+                                    Uint8List bytes = await image.readAsBytes();
+                                    var decodedImage = await decodeImageFromList(bytes);
 
                                     setState(() {
                                       height = decodedImage.height.toDouble();
                                       width = decodedImage.width.toDouble();
-                                      aspectRadio=decodedImage.height/decodedImage.width;
-                                      _image = image;
+                                      aspectRadio = decodedImage.height / decodedImage.width;
+                                      _image = File.fromRawPath(bytes);
                                     });
                                     setState(() => _controller.clear());
                                     Navigator.pop(context);
@@ -846,16 +813,15 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                             IconButton(
                                 icon: Icon(Icons.camera_alt),
                                 onPressed: () async {
-                                  var image = await ImagePicker.pickImage(
-                                      source: ImageSource.camera);
-                                  var decodedImage = await decodeImageFromList(
-                                      image.readAsBytesSync());
+                                  var image = await ImagePicker().pickImage(source: ImageSource.camera);
+                                  Uint8List bytes = await image.readAsBytes();
+                                  var decodedImage = await decodeImageFromList(bytes);
 
                                   setState(() {
-                                    height = decodedImage.height.toDouble()-(2*kBottomNavigationBarHeight);
+                                    height = decodedImage.height.toDouble() - (2 * kBottomNavigationBarHeight);
                                     width = decodedImage.width.toDouble();
-                                    aspectRadio=decodedImage.height/decodedImage.width;
-                                    _image = image;
+                                    aspectRadio = decodedImage.height / decodedImage.width;
+                                    _image = File.fromRawPath(bytes);
                                   });
                                   setState(() => _controller.clear());
                                   Navigator.pop(context);
@@ -901,11 +867,7 @@ class _SignatState extends State<Signat> {
         //SIGNATURE CANVAS
         ListView(
       children: <Widget>[
-        Signature(
-            controller: _controller,
-            height: height.toDouble(),
-            width: width.toDouble(),
-            backgroundColor: Colors.transparent),
+        Signature(controller: _controller, height: height.toDouble(), width: width.toDouble(), backgroundColor: Colors.transparent),
       ],
     );
   }
